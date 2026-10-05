@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Web Push">
+  <title>Notificaciones Web Push</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="brand-mark" aria-hidden="true">🔔</div>
+      <div>
+        <p class="eyebrow">PWA · Web Push</p>
+        <h1>Notificaciones personalizadas</h1>
+        <p class="subtitle">Registra este dispositivo y recibe notificaciones del sistema incluso cuando la app no esté abierta.</p>
+      </div>
+    </header>
+
+    <section id="iosNotice" class="notice hidden" role="status">
+      <strong>iPhone/iPad:</strong> primero añade esta web a la pantalla de inicio y ábrela desde su icono. Después podrás activar notificaciones.
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="card-title-row">
+          <div>
+            <p class="kicker">Este dispositivo</p>
+            <h2>Activar notificaciones</h2>
+          </div>
+          <span id="supportBadge" class="pill">Comprobando…</span>
+        </div>
+
+        <div class="status-list">
+          <div><span>Navegador</span><strong id="browserStatus">—</strong></div>
+          <div><span>Permiso</span><strong id="permissionStatus">—</strong></div>
+          <div><span>Suscripción</span><strong id="subscriptionStatus">—</strong></div>
+          <div><span>Modo PWA</span><strong id="pwaStatus">—</strong></div>
+        </div>
+
+        <label class="field">
+          <span>Nombre de este dispositivo</span>
+          <input id="deviceName" maxlength="60" placeholder="Ej. Laptop personal, iPhone, Tablet">
+        </label>
+
+        <div class="actions">
+          <button id="subscribeBtn" class="btn primary">Activar notificaciones</button>
+          <button id="unsubscribeBtn" class="btn secondary" disabled>Desactivar</button>
+        </div>
+        <p id="clientMessage" class="message" aria-live="polite"></p>
+      </article>
+
+      <article class="card admin-card">
+        <div class="card-title-row">
+          <div>
+            <p class="kicker">Administrador</p>
+            <h2>Enviar una notificación</h2>
+          </div>
+          <span class="pill neutral">Push real</span>
+        </div>
+
+        <label class="field">
+          <span>Token de administrador</span>
+          <div class="inline">
+            <input id="adminToken" type="password" autocomplete="off" placeholder="ADMIN_TOKEN de .env">
+            <button id="loadDevicesBtn" class="btn compact secondary">Cargar</button>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Destino</span>
+          <select id="targetDevice">
+            <option value="all">Todos los dispositivos</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Título</span>
+          <input id="notificationTitle" maxlength="90" value="Recordatorio">
+        </label>
+
+        <label class="field">
+          <span>Mensaje</span>
+          <textarea id="notificationBody" maxlength="240" rows="4" placeholder="Escribe el contenido de la notificación…">Esta es una notificación Web Push de prueba.</textarea>
+        </label>
+
+        <div class="two-cols">
+          <label class="field">
+            <span>URL al tocar</span>
+            <input id="notificationUrl" value="/" placeholder="/ o https://…">
+          </label>
+          <label class="field">
+            <span>Etiqueta</span>
+            <input id="notificationTag" value="recordatorio" maxlength="80">
+          </label>
+        </div>
+
+        <label class="check">
+          <input id="requireInteraction" type="checkbox">
+          <span>Mantener visible cuando el navegador/SO lo permita</span>
+        </label>
+
+        <button id="sendBtn" class="btn primary full">Enviar ahora</button>
+        <p id="adminMessage" class="message" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="card info-card">
+      <p class="kicker">Cómo funciona</p>
+      <h2>Lo que ocurre detrás</h2>
+      <div class="steps">
+        <div><b>1</b><span>El navegador registra un Service Worker.</span></div>
+        <div><b>2</b><span>El usuario concede permiso y se crea una suscripción Push.</span></div>
+        <div><b>3</b><span>El servidor guarda esa suscripción y envía mensajes cifrados con VAPID.</span></div>
+        <div><b>4</b><span>El sistema operativo muestra la notificación aunque la página esté cerrada.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

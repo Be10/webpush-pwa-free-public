@@ -1,0 +1,16 @@
+NOTIFICACIONES WEB PUSH - INICIO RAPIDO
+
+1. Instala Node.js 20 o superior.
+2. Abre una terminal dentro de esta carpeta.
+3. Ejecuta: npm start
+4. Abre: http://localhost:3000
+5. Activa las notificaciones en el navegador.
+6. En el panel Administrador usa este token local:
+
+5bbbbc82b37302ad61f6063cff173610f8461fbd1f71e175
+
+IMPORTANTE:
+- localhost sirve para pruebas sin HTTPS.
+- En produccion debes publicar la app con HTTPS.
+- Antes de publicar en Internet, elimina .env y ejecuta "npm run setup" para generar claves y token nuevos.
+- En iPhone/iPad agrega primero la web a la pantalla de inicio y abre la PWA desde su icono.
